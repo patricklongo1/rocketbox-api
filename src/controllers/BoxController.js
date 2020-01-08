@@ -18,6 +18,11 @@ class BoxController {
 
     async store(req, res) {
         const { title } = req.body;
+        const boxExists = await Box.findOne({ title });
+
+        if (boxExists) {
+            return res.json(boxExists);
+        }
 
         const box = await Box.create({ title });
 
